@@ -1,58 +1,62 @@
 import express from "express";
+import { UsersRouter } from "./routers/usesrs.router.js";
 
 const app = express();
 app.use(express.json());
+const PORT = 4100
 
-let users = [
-  { id: 1, name: "Ali" },
-  { id: 2, name: "Vali" },
-];
+app.use("/users", UsersRouter())
 
-app.get("/users", (req, res) => {
-  res.send(users);
-});
+// let users = [
+//   { id: 1, name: "Ali" },
+//   { id: 2, name: "Vali" },
+// ];
 
-app.post("/users", (req, res) => {
-  const newUsers = {
-    id: Date.now(),
-    name: req.body.name,
-  };
+// app.get("/users", (req, res) => {
+//   res.send(users);
+// });
 
-  users.push(newUsers);
+// app.post("/users", (req, res) => {
+//   const newUsers = {
+//     id: Date.now(),
+//     name: req.body.name,
+//   };
 
-  res.status(201).json({
-    massage: "User created",
-    data: newUsers,
-  });
-});
+//   users.push(newUsers);
 
-app.put("/users/:id", (req, res) => {
-  const user = users.find((u) => u.id == req.params.id);
+//   res.status(201).json({
+//     massage: "User created",
+//     data: newUsers,
+//   });
+// });
 
-  if (!user) {
-    return res.status(404).json({ message: "User not found" });
-  }
+// app.put("/users/:id", (req, res) => {
+//   const user = users.find((u) => u.id == req.params.id);
 
-  user.name = req.body.name;
+//   if (!user) {
+//     return res.status(404).json({ message: "User not found" });
+//   }
 
-  res.json({
-    message: "User updated",
-    data: user,
-  });
-});
+//   user.name = req.body.name;
 
-app.delete("/users/:id", (req, res) => {
-  const index = users.findIndex((u) => u.id == req.params.id);
+//   res.json({
+//     message: "User updated",
+//     data: user,
+//   });
+// });
 
-  if (index === -1) {
-    return res.status(404).json({ message: "User not found" });
-  }
+// app.delete("/users/:id", (req, res) => {
+//   const index = users.findIndex((u) => u.id == req.params.id);
 
-  users.splice(index, 1);
+//   if (index === -1) {
+//     return res.status(404).json({ message: "User not found" });
+//   }
 
-  res.json({ message: "User deleted" });
-});
+//   users.splice(index, 1);
 
-app.listen(3000, () => {
-  console.log(`Server started on http://localhost:3000`);
+//   res.json({ message: "User deleted" });
+// });
+
+app.listen(PORT, () => {
+  console.log(`Server started on http://localhost:${PORT}`);
 });

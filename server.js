@@ -1,8 +1,10 @@
 import express from "express";
 import { UsersRouter } from "./routers/usesrs.router.js";
+import { errorMiddleware } from "./middlewares/error.middleware.js";
 
 const app = express();
 app.use(express.json());
+app.use(errorMiddleware)
 const PORT = 4100
 
 app.use("/users", UsersRouter())

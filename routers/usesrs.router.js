@@ -6,6 +6,8 @@ export const UsersRouter = () => {
 
   router.get("/", usesrsController.getAll);
   router.post("/", usesrsController.create);
+  router.put("/:id", usesrsController.update);
+  router.delete("/:id", usesrsController.delete);
 
   return router
 };

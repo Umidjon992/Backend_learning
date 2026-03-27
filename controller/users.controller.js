@@ -1,4 +1,4 @@
-import usesrsService from "../service/usesrs.service.js";
+import usesrsService from "../service/usesrs.service.js ";
 
 class UsersCantroller {
   async getAll(req, res) {
@@ -18,6 +18,32 @@ class UsersCantroller {
       data: create,
     });
   }
+
+  async update(req, res) {
+    const user = usesrsService.update(req.params.id, req.body);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json({
+      message: "User updated",
+      data: user,
+    });
+  }
+
+  async delete(req, res) {
+    const index = usesrsService.delete(req.params.id, req.body);
+
+    if (!index) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json({
+      massage: "User deleted",
+      data: index,
+    })
+  }
 }
 
-export default new UsersCantroller()
+export default new UsersCantroller();

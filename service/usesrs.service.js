@@ -30,16 +30,16 @@ class UserService {
     return user;
   }
 
-  delete(id,data) {
-    const user_d = this.users.findIndex(u => u.id == id)
+  delete(id) {
+    const index = this.users.findIndex(u => u.id == id)
 
-    if(data === -1) {
+    if(index === -1) {
       return null
     }
 
-    this.users.splice(user_d,1)
+    const deleteUsers = this.users.splice(index,1)
 
-    return user_d
+    return deleteUsers[0]
   }
 }
 

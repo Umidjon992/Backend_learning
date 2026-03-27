@@ -33,14 +33,14 @@ class UsersCantroller {
   }
 
   async delete(req, res) {
-    const index = usesrsService.delete(req.params.id, req.body);
+    const index = usesrsService.delete(req.params.id);
 
     if (!index) {
       return res.status(404).json({ message: "User not found" });
     }
 
     res.json({
-      massage: "User deleted",
+      message: "User deleted",
       data: index,
     })
   }

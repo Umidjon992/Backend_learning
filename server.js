@@ -4,7 +4,6 @@ import { errorMiddleware } from "./middlewares/error.middleware.js";
 
 const app = express();
 app.use(express.json());
-app.use(errorMiddleware)
 const PORT = 4100
 
 app.use("/users", UsersRouter())
@@ -58,6 +57,8 @@ app.use("/users", UsersRouter())
 
 //   res.json({ message: "User deleted" });
 // });
+
+app.use(errorMiddleware)
 
 app.listen(PORT, () => {
   console.log(`Server started on http://localhost:${PORT}`);

@@ -19,17 +19,21 @@ class UsersCantroller {
     });
   }
 
-  async update(req, res) {
-    const user = usesrsService.update(req.params.id, req.body);
+  async update(req, res, next) {
+    try {
+      const user = usesrsService.update(req.params.id, req.body);
 
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      res.json({
+        message: "User updated",
+        data: user,
+      });
+    } catch (error) {
+      next(error);
     }
-
-    res.json({
-      message: "User updated",
-      data: user,
-    });
   }
 
   async delete(req, res) {
@@ -42,7 +46,7 @@ class UsersCantroller {
     res.json({
       message: "User deleted",
       data: index,
-    })
+    });
   }
 }
 
